@@ -1,0 +1,11 @@
+#Neon DB
+DATABASE_URL="postgres://neondb_owner:qX7R4NSzahUn@ep-frosty-cell-a4ackly9-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require"
+
+NEXT_PUBLIC_APP_NAME="ESTORE"
+NEXT_PUBLIC_APP_DESCRIPTION="ESTORE POINT OF SALE"
+NEXT_PUBLIC_SERVER_URL="http://localhost:3000"
+NEXTAUTH_SECRET=xmVpackzg9sdkEBzJsGse3rosvkUY+4ni2quxvoK6Go=
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_URL_INTERNAL=http://localhost:3000
+#Local DB
+#DATABASE_URL="postgresql://postgres:master@localhost:5432/estore?schema=public"  
