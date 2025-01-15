@@ -11,8 +11,7 @@ export function convertToPlainObject<T>(value: T): T {
 //Format number with demical points
 export function formatNumberWithDecimal(num: number): string {
   const [int, decimal] = num.toString().split(".");
-
-  return decimal ? `${int}.${decimal.padEnd(2, "0")}` : "$${int}.00";
+  return decimal ? `${int}.${decimal.padEnd(2, "0")}` : `${int}.00`;
 }
 
 //format errors
@@ -36,5 +35,15 @@ export async function formatErrors(error: any) {
     return typeof error.message === "string"
       ? error.message
       : JSON.stringify(error.message);
+  }
+}
+//round a number to 2 decimal points
+export function round2(value: number | string) {
+  if (typeof value === "number") {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
+  } else if (typeof value === "string") {
+    return Math.round((Number(value) + Number.EPSILON) * 100) / 100;
+  } else {
+    throw new Error("Value must be a number or a string");
   }
 }
