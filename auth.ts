@@ -9,30 +9,36 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export const config = {
+  //  Custom sign-in and error pages.
   pages: {
     signIn: "/auth/signin",
     error: "/auth/signin",
   },
+  //  JWT-based session strategy with a max age of 30 days.
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
   },
+  //  adapter: Prisma adapter for database integration.
   adapter: PrismaAdapter(prisma),
+  //  Credentials provider for email/password authentication
   providers: [
     CredentialsProvider({
       credentials: {
         email: { type: "email" },
         password: { type: "password" },
       },
+      //  Function to authorize users based on credentials.
       async authorize(credentials) {
         if (credentials == null) return null;
-
+        //  Use prisma to find user by email and store in user variable.
         const user = await prisma.user.findFirst({
           where: {
             email: credentials.email as string,
           },
         });
 
+        // If user exists and has a password, compare the password with the credentials using bCrypt.
         if (user && user.password) {
           const isMatch = compareSync(
             credentials.password as string,
@@ -71,6 +77,7 @@ export const config = {
     async jwt({ token, user, trigger, session }: any) {
       //assign user fields to the token
       if (user) {
+        token.id = user.id;
         token.role = user.role;
 
         //if user has no name then use the email
