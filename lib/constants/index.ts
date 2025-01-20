@@ -16,3 +16,11 @@ export const signUpDefaultValues = {
   password: "",
   confirmPassword: "",
 };
+
+export const shippingAddressDefaultValues = {
+  fullName: "Eric Calcano",
+  streetAddress: "1523 scriven ave",
+  city: "Bellmore",
+  postalCode: "11710",
+  country: "USA",
+};

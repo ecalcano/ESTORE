@@ -7,6 +7,7 @@ import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";
 import { use } from "react";
 import { formatErrors } from "../utils";
+import { error } from "console";
 
 //Sign in a user with credentials
 export async function signInWithCredentials(
@@ -69,4 +70,13 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
     }
     return { success: false, message: formatErrors(error) };
   }
+}
+
+//get user by id
+export async function getUserById(userId: string) {
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
+  });
+  if (!user) throw new Error("User not found");
+  return user;
 }
